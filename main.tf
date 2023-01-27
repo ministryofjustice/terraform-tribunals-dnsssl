@@ -3,11 +3,19 @@ resource "aws_route53_zone" "public" {
   name         = var.aws_route53_zone
 }
 
-data "aws_acm_certificate" "acm_certificate" {
-  domain      = var.domain_name
-  types       = ["AMAZON_ISSUED"]
-  most_recent = true
+resource "aws_acm_certificate" "acm_certificate" {
+  domain_name      = var.domain_name
+  validation_method = "DNS"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
+
+# data "aws_acm_certificate" "acm_certificate" {
+#   domain      = var.domain_name
+#   types       = ["AMAZON_ISSUED"]
+#   most_recent = true
+# }
 
 
 resource "aws_route53_record" "new-route53-record" {
