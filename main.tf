@@ -11,11 +11,11 @@ resource "aws_acm_certificate" "acm_certificate" {
   }
 }
 
-# data "aws_acm_certificate" "acm_certificate" {
-#   domain      = var.domain_name
-#   types       = ["AMAZON_ISSUED"]
-#   most_recent = true
-# }
+data "aws_acm_certificate" "acm_certificate" {
+  domain      = var.domain_name
+  types       = ["AMAZON_ISSUED"]
+  most_recent = true
+}
 
 
 resource "aws_route53_record" "new-route53-record" {
